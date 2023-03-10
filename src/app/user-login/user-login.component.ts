@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UserServiceService } from '../user-service.service';
 
 @Component({
   selector: 'app-user-login',
@@ -7,4 +9,17 @@ import { Component } from '@angular/core';
 })
 export class UserLoginComponent {
 
+  constructor(private userService:UserServiceService){}
+
+
+  loginForm=new FormGroup({
+    email: new FormControl('',),
+    password: new FormControl('',),
+  })
+  Login(){
+    console.log(this.loginForm.value);
+    this.userService.loginUser(this.loginForm.value).subscribe(e=>{
+      console.log(e);
+    })
+  }
 }
